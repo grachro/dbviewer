@@ -8,5 +8,6 @@
   <modules>
     <module>dbviewer-web</module>
     <module>dbviewer-macro-java</module>
+    <module>dbviewer-core</module>
   </modules>
 </project>
