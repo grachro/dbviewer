@@ -31,7 +31,7 @@
 				jdbc2.password=xxxx
 				-->
 				<!--  <value>classpath:db.properties</value> -->
-				<value>file:${user.home}/db.properties</value>
+				<value>file:${user.home}/dbviewer/db.properties</value>
 			</list>
 		</property>
 	</bean>
