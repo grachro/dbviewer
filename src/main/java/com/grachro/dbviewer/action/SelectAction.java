@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.grachro.dbviewer.Command;
 import com.grachro.dbviewer.Database;
@@ -18,16 +20,29 @@ import com.grachro.dbviewer.Script;
 import com.grachro.dbviewer.ScriptFactiory;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SelectAction extends ActionSupport {
+public class SelectAction extends ActionSupport implements ServletRequestAware {
+	private HttpServletRequest request;
 
 	private static final long serialVersionUID = 1L;
 	private static final String PARAM_HEAD = "param-";
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+
+		ServletContext context = this.request.getSession().getServletContext();
+		System.out.println("####################");
+		System.out.println("####################");
+		System.out.println(context.getRealPath("/"));
+		System.out.println("####################");
+		System.out.println("####################");
+	}
 
 	/** DIフィールド */
 	private List<Database> databaseList;
 
 	/** DIフィールド */
-	private List<String> scriptHolderList;
+	private List<Object> scriptHolderList;
 
 	private ScliptList scriptList;
 
@@ -46,7 +61,7 @@ public class SelectAction extends ActionSupport {
 	}
 
 	/** DIフィールド */
-	public void setScriptHolderList(List<String> scriptHolderList) {
+	public void setScriptHolderList(List<Object> scriptHolderList) {
 		this.scriptHolderList = scriptHolderList;
 	}
 
@@ -61,9 +76,8 @@ public class SelectAction extends ActionSupport {
 	public List<Script> getScriptList() {
 		if (scriptList == null) {
 			scriptList = new ScliptList();
-			for (String className : scriptHolderList) {
-				scriptList.addAll(ScriptFactiory
-						.loadScriptsFromClassName(className));
+			for (Object holder : scriptHolderList) {
+				scriptList.addAll(ScriptFactiory.loadScriptsFromHolderObjects(holder));
 			}
 		}
 		return scriptList.getList();
@@ -116,8 +130,7 @@ public class SelectAction extends ActionSupport {
 	protected Map<String, String> getSqlParams() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 
-		Map<String, String[]> parameterMap = (Map<String, String[]>) request
-				.getParameterMap();
+		Map<String, String[]> parameterMap = (Map<String, String[]>) request.getParameterMap();
 		Map<String, String> result = new HashMap<String, String>();
 		for (Entry<String, String[]> entry : parameterMap.entrySet()) {
 			if (entry.getKey() == null || entry.getValue() == null) {
@@ -139,13 +152,8 @@ public class SelectAction extends ActionSupport {
 	}
 
 	protected Script getScript() {
-		Class<?> clazz;
-		try {
-			clazz = Class.forName(scriptId);
-			return (Script) clazz.newInstance();
-		} catch (Exception e) {
-			throw new IllegalStateException("scriptId=" + scriptId, e);
-		}
+		getScriptList();
+		return this.scriptList.getScript(scriptId);
 	}
 
 }

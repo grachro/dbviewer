@@ -52,7 +52,10 @@
 	</util:list>
 
 	<util:list id="scriptHolderList">
-		<value>sample.script.AllScripts</value>
+		<bean class="com.grachro.dbviewer.script.AllJavaScripts"></bean>
+		<bean class="com.grachro.dbviewer.script.AllGroovyScripts">
+			<property name="scriptDirPath" value="${user.home}/dbviewer/groovy" />
+		</bean>
 	</util:list>
 
 	<bean class="com.grachro.dbviewer.action.SelectAction">

@@ -33,19 +33,10 @@ public class ScriptFactiory {
 		return result;
 	}
 
-	public static Set<Script> loadScriptsFromClassName(String className) {
-		try {
-			Class<?> clazz = Class.forName(className);
-			return loadScripts(clazz);
-		} catch (ClassNotFoundException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
 	/**
 	 * holderClassをインスタンス化し、getScriptList()からスクリプトのリストを取得
 	 */
-	public static Set<Script> loadScripts(Class<?> holderClass) {
+	private static Set<Script> loadScripts(Class<?> holderClass) {
 
 		Method method;
 		try {
@@ -67,4 +58,26 @@ public class ScriptFactiory {
 		}
 
 	}
+
+	public static Set<Script> loadScriptsFromHolderObjects(Object holder) {
+
+		Method method;
+		try {
+			method = holder.getClass().getMethod(METHOD_NAME);
+		} catch (Exception e) {
+			throw new IllegalStateException(holder.getClass() + "." + METHOD_NAME + " access is fatal..", e);
+		}
+
+		try {
+			@SuppressWarnings("unchecked")
+			Set<Script> scriptList = (Set<Script>) method.invoke(holder);
+
+			return scriptList;
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
 }

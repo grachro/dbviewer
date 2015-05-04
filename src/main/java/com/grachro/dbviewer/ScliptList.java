@@ -32,6 +32,15 @@ public class ScliptList {
 		return scriptList;
 	}
 
+	public Script getScript(String scriptId) {
+		for (Script script : this.scriptList) {
+			if (script.getScriptId().equals(scriptId)) {
+				return script;
+			}
+		}
+		return null;
+	}
+
 	private static class MySort implements Comparator<Script> {
 
 		@Override
