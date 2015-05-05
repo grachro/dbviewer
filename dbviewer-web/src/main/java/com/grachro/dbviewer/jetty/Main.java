@@ -3,6 +3,7 @@ package com.grachro.dbviewer.jetty;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.plus.webapp.EnvConfiguration;
 import org.eclipse.jetty.plus.webapp.PlusConfiguration;
@@ -70,6 +71,10 @@ public class Main {
 				return name.endsWith(".jar");
 			}
 		});
+
+		if (jars == null) {
+			return StringUtils.EMPTY;
+		}
 
 		StringBuilder sb = new StringBuilder();
 		for (File f : jars) {
