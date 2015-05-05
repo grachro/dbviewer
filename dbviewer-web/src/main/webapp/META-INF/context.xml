@@ -3,6 +3,6 @@
   <Loader
     className="org.apache.catalina.loader.VirtualWebappLoader"
     searchExternalFirst="true"
-    virtualClasspath="${user.home}/dbviewer/java"
+    virtualClasspath="${user.home}/dbviewer/lib/*.jar;${user.home}/dbviewer/java"
   />
 </Context>
