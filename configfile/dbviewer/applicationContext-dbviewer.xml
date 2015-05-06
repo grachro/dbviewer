@@ -15,39 +15,32 @@
 
 	<context:annotation-config/>
 
-	<!-- properties file -->
+	<!-- use properties file sanple-->
+<!-- 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<!--
-				jdbc1.driverClassName=com.mysql.jdbc.Driver
-				jdbc1.url=jdbc:mysql://localhost/jamwiki
-				jdbc1.username=xxxx
-				jdbc1.password=xxxx
-
-				jdbc2.driverClassName=oracle.jdbc.OracleDriver
-				jdbc2.url=jdbc:oracle:thin:@[HOST]:1521:[SID]
-				jdbc2.username=xxxx
-				jdbc2.password=xxxx
-				-->
-				<!--  <value>classpath:db.properties</value> -->
 				<value>file:${user.home}/dbviewer/db.properties</value>
 			</list>
 		</property>
 	</bean>
 
-	<!-- database -->
 	<bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc1.driverClassName}" />
 		<property name="url" value="${jdbc1.url}" />
 		<property name="username" value="${jdbc1.username}" />
 		<property name="password" value="${jdbc1.password}" />
 	</bean>
+ -->
+	<bean id="sqliteSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.sqlite.JDBC" />
+		<property name="url" value="jdbc:sqlite:${user.home}/dbviewer/dbviewer.sqlite" />
+	</bean>
 
 	<util:list id="databaseList">
 		<bean class="com.grachro.dbviewer.Database">
-			<property name="caption" value="データベース1" />
-			<property name="dataSource" ref="dataSource1" />
+			<property name="caption" value="dbviewer.sqlite" />
+			<property name="dataSource" ref="sqliteSource" />
 		</bean>
 	</util:list>
 

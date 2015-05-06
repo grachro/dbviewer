@@ -12,30 +12,32 @@ import com.grachro.dbviewer.ScriptHolder;
 public class SampleScript1 extends DefaultScript {
 
 	public SampleScript1() {
-		super("サンプルスクリプト1");
+		super("1 一覧表示");
 	}
 
 	@Override
 	public void doScript(List<Database> databaseList, List<Command> commandList, Map<String, String> sqlParams) {
 		Database db = databaseList.get(0);
 
-		// JAMWikiのユーザデータを見る場合の例
-
-		Command command1 = new Command("カテゴリ", "select * from  jam_users");
+		Command command1 = new Command("ページの一覧", "select * from pages order by title");
 		commandList.add(command1);
 		command1.execute(db);
 
-		String firstName = command1.getFirstVal("username");
-		String sql2 = "select * from  jam_authorities where username='" + firstName + "'";
-		Command command2 = new Command("最初のユーザの権限", sql2);
+		Command command2 = new Command("カテゴリの一覧", "select * from categories order by category_name ");
 		commandList.add(command2);
 		command2.execute(db);
 
-		String lastName = command1.getLastVal("username");
-		String sql3 = "select * from  jam_authorities where username='" + lastName + "'";
-		Command command3 = new Command("最後のユーザの権限", sql3);
+		String firstTitle = command1.getFirstVal("title");
+		String sql3 = "select * from category_page where title='" + firstTitle + "'";
+		Command command3 = new Command("最初のページのカテゴリ", sql3);
 		commandList.add(command3);
 		command3.execute(db);
+
+		String lastTitle = command1.getLastVal("title");
+		String sql4 = "select * from category_page where title='" + lastTitle + "'";
+		Command command4 = new Command("最初のページのカテゴリ", sql4);
+		commandList.add(command4);
+		command4.execute(db);
 
 	}
 

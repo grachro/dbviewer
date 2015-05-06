@@ -13,13 +13,13 @@ import com.grachro.dbviewer.ScriptHolder;
 public class SampleScript2 extends DefaultScript {
 
 	public SampleScript2() {
-		super("サンプルスクリプト2");
+		super("2 ページで検索");
 	}
 
 	@Override
 	public List<String> getUseParams() {
 		List<String> list = new ArrayList<String>();
-		list.add("userName");
+		list.add("pageTitle");
 		return list;
 	}
 
@@ -27,16 +27,14 @@ public class SampleScript2 extends DefaultScript {
 	public void doScript(List<Database> databaseList, List<Command> commandList, Map<String, String> sqlParams) {
 		Database db = databaseList.get(0);
 
-		// JAMWikiのユーザデータを見る場合の例
+		String pageTitle = sqlParams.get("pageTitle");
 
-		String userName = sqlParams.get("userName");
-
-		Command command1 = new Command("カテゴリ", "select * from  jam_users where USERNAME='" + userName + "'");
+		Command command1 = new Command("ページ", "select * from pages where title='" + pageTitle + "'");
 		commandList.add(command1);
 		command1.execute(db);
 
-		String sql2 = "select * from  jam_authorities where username='" + userName + "'";
-		Command command2 = new Command("ユーザの権限", sql2);
+		String sql2 = "select * from category_page where title='" + pageTitle + "'";
+		Command command2 = new Command("ページのカテゴリ", sql2);
 		commandList.add(command2);
 		command2.execute(db);
 

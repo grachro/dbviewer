@@ -10,29 +10,23 @@ import com.grachro.dbviewer.ScriptHolder;
 public class SampleGroovyScript extends DefaultScript {
 
 	public SampleGroovyScript() {
-		super("サンプルGroovyスクリプト");
+		super("3 Groovy!");
 	}
 
 	@Override
 	public void doScript(List<Database> databaseList, List<Command> commandList, Map<String, String> sqlParams) {
 		Database db = databaseList.get(0);
 
-		// JAMWikiのユーザデータを見る場合の例
-		Command command1 = new Command("カテゴリ", "select * from  jam_users");
+		String pageTitle = 'Groovy';
+
+		Command command1 = new Command("ページ", "select * from pages where title='" + pageTitle + "'");
 		commandList.add(command1);
 		command1.execute(db);
 
-		String firstName = command1.getFirstVal("username");
-		String sql2 = "select * from  jam_authorities where username='" + firstName + "'";
-		Command command2 = new Command("最初のユーザの権限", sql2);
+		String sql2 = "select * from category_page where title='" + pageTitle + "'";
+		Command command2 = new Command("ページのカテゴリ", sql2);
 		commandList.add(command2);
 		command2.execute(db);
-
-		String lastName = command1.getLastVal("username");
-		String sql3 = "select * from  jam_authorities where username='" + lastName + "'";
-		Command command3 = new Command("最後のユーザの権限", sql3);
-		commandList.add(command3);
-		command3.execute(db);
 
 	}
 

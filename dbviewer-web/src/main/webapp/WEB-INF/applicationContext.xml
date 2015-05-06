@@ -15,6 +15,14 @@
 
 	<context:annotation-config/>
 
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:${user.home}/dbviewer/db.properties</value>
+			</list>
+		</property>
+	</bean>
+
 	<import resource="file:${user.home}/dbviewer/applicationContext-dbviewer.xml"/>
 
 	<bean class="com.grachro.dbviewer.action.SelectAction">
