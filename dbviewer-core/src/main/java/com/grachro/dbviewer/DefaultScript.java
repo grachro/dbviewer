@@ -40,4 +40,16 @@ public abstract class DefaultScript implements Script {
 		return result;
 	}
 
+	public Command execute(Database db, List<Command> commandList, String name, String sql) {
+		Command command = new Command(name, sql);
+		commandList.add(command);
+		command.execute(db);
+		return command;
+	}
+	
+	public Command editSqlOnly(Database db, List<Command> commandList, String name, String sql) {
+		Command command = new Command(name, sql);
+		commandList.add(command);
+		return command;
+	}
 }

@@ -68,11 +68,7 @@ td {
 		<span><s:property value="%{sql}" /></span><br />
 		<span style="font-size:65%;"><s:property value="%{dbCaption}" /></span><br />
 		<s:if test="%{#command.getResult().isEmpty()}">
-			<tr>
-				<td>
-					該当データなし
-				</td>
-			</tr>
+			該当データなし<br><br>
 		</s:if>
 		<s:else>
 			<table>

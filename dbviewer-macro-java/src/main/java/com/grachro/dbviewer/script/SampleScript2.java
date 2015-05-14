@@ -29,14 +29,10 @@ public class SampleScript2 extends DefaultScript {
 
 		String pageTitle = sqlParams.get("pageTitle");
 
-		Command command1 = new Command("ページ", "select * from pages where title='" + pageTitle + "'");
-		commandList.add(command1);
-		command1.execute(db);
+		execute(db, commandList, "ページ", "select * from pages where title='" + pageTitle + "'");
 
 		String sql2 = "select * from category_page where title='" + pageTitle + "'";
-		Command command2 = new Command("ページのカテゴリ", sql2);
-		commandList.add(command2);
-		command2.execute(db);
+		execute(db, commandList, "ページのカテゴリ", sql2);
 
 	}
 

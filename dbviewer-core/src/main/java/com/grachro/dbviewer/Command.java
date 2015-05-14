@@ -11,7 +11,7 @@ public class Command {
 	private String dbCaption;
 	private String name;
 	private String sql;
-	private List<DbRecord> result;
+	private List<DbRecord> result = Collections.emptyList();
 
 	public Command(String name, String sql) {
 		this.name = name;

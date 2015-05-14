@@ -13,6 +13,7 @@ public class AllJavaScripts {
 		Set<Script> result = new HashSet<Script>();
 		result.add(new SampleScript1());
 		result.add(new SampleScript2());
+		result.add(new SampleScript4());
 		return result;
 	}
 }
