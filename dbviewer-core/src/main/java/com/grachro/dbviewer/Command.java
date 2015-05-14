@@ -1,8 +1,11 @@
 package com.grachro.dbviewer;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class Command {
 	private String dbCaption;
@@ -63,4 +66,30 @@ public class Command {
 		return result;
 	}
 
+	public List<String> getValues(String colName) {
+
+		if (this.result == null || this.result.isEmpty()) {
+			return Collections.emptyList();
+		}
+
+		List<String> result = new ArrayList<String>();
+		for (DbRecord record : this.result) {
+			String value = record.get(colName.toUpperCase());
+			result.add(value);
+		}
+
+		return result;
+	}
+
+	public String jointedStringValues(String colName) {
+
+		List<String> base = getValues(colName);
+		List<String> newList = new ArrayList<String>();
+		for (String s : base) {
+			newList.add("'" + s + "'");
+		}
+
+		return StringUtils.join(newList, ",");
+
+	}
 }
