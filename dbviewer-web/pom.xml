@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.grachro</groupId>
@@ -12,6 +12,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dbviewer-web</name>
 	<url>http://maven.apache.org</url>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -44,16 +46,6 @@
 			<version>2.4.3</version>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-jsp</artifactId>
-			<version>9.3.0.M1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty.aggregate</groupId>
-			<artifactId>jetty-all-server</artifactId>
-			<version>8.1.17.v20150415</version>
-		</dependency>
-		<dependency>
 			<groupId>com.grachro</groupId>
 			<artifactId>dbviewer-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -65,7 +57,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<build>
-		<finalName>dbviewer</finalName>
-	</build>
+ 
+  <build>
+    <finalName>dbviewer</finalName>
+  </build>
 </project>
