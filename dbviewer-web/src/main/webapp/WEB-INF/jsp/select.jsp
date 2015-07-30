@@ -65,11 +65,14 @@ td {
 <s:else>
 	<s:iterator value="commandList" var="command" status="comsts">
 		<span class="command-name"><s:property value="%{name}" /></span><br />
-		<span><s:property value="%{sql}" /></span><br />
+		<span><pre><s:property value="%{sql}" /></pre></span><br />
 		<span style="font-size:65%;"><s:property value="%{dbCaption}" /></span><br />
-		<s:if test="%{#command.getResult().isEmpty()}">
-			該当データなし<br><br>
+		
+		<s:if test="%{#command.editOnly}">
 		</s:if>
+		<s:elseif test="%{#command.getResult().isEmpty()}">
+			該当データなし<br><br>
+		</s:elseif>
 		<s:else>
 			<table>
 				<tr>

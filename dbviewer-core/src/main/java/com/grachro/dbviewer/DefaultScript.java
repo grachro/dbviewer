@@ -49,6 +49,7 @@ public abstract class DefaultScript implements Script {
 	
 	public Command editSqlOnly(Database db, List<Command> commandList, String name, String sql) {
 		Command command = new Command(name, sql);
+		command.editOnly = true;
 		commandList.add(command);
 		return command;
 	}

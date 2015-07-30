@@ -12,7 +12,8 @@ public class Command {
 	private String name;
 	private String sql;
 	private List<DbRecord> result = Collections.emptyList();
-
+	public boolean editOnly;
+	
 	public Command(String name, String sql) {
 		this.name = name;
 		this.sql = sql;
