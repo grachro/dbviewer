@@ -46,11 +46,12 @@ td {
 <s:if test="%{commandList.isEmpty()}">
 <s:iterator value="scriptList" var="script" status="sts">
 <s:form action="select" method="get">
-	${script.scriptCaption}
+	<h2>${script.scriptCaption}</h2>
+	<s:if test="#script.description != null"><pre>${script.description}</pre></s:if>
 	<input type="hidden" name="scriptId" value="${script.scriptId}" />
 	<ul>
 	<s:iterator value="#script.useParams" var="useParam">
-	   	<li>${useParam}<input type="text" name="param-${useParam}" value="" /></li>
+	   	<li>${useParam.caption}<input type="text" name="param-${useParam.name}" value="" /><s:if test="#useParam.description != null">　${useParam.description}</s:if></li>
 	</s:iterator>
 	</ul>
 	<s:submit action="query" />

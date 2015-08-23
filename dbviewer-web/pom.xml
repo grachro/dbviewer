@@ -5,7 +5,7 @@
 	<groupId>com.grachro</groupId>
 	<artifactId>dbviewer-web</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<name>dbviewer-web</name>
 	<url>http://maven.apache.org</url>
 
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>com.grachro</groupId>
 			<artifactId>dbviewer-core</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
